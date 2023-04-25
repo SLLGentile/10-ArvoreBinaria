@@ -71,7 +71,7 @@ void menu()
 void inicializar()
 {
 
-	// provis�rio porque n�o libera a memoria usada pela arvore
+	// provisório porque não libera a memoria usada pela arvore
 	NO* raiz = NULL;
 	
 	cout << "Arvore inicializada \n";
@@ -120,8 +120,26 @@ NO* criaNO(int valor)
 }
 
 NO* insereArvore(NO* no, int valor)
+
 {
-	
+	if (no->valor > valor && no->esq == NULL) {
+		no->esq = criaNO(valor);
+		return no->esq;
+	}
+	else if (no->valor < valor && no->dir == NULL) {
+		no->dir = criaNO(valor);
+		return no->dir;
+	}
+	else if (no->valor > valor) {
+		return insereArvore(no->esq, valor);
+	}
+	else if (no->valor < valor) {
+		return insereArvore(no->dir, valor);
+	}
+	else {
+		return NULL;
+	}
+
 }
 
 int elementosArvore(NO* no)
@@ -135,5 +153,17 @@ int elementosArvore(NO* no)
 
 void exibirElementosArvore(NO* no)
 {
-	
+	if (no == NULL)
+	{
+		return;
+	}
+
+	cout << no->valor << endl;
+
+	exibirElementosArvore(no->esq);
+	exibirElementosArvore(no->dir);
 }
+
+
+// Implemente a função insereArvore que deve inserir um elemento na arvore usando recursividade
+// Implemente a função exibirElementosArvore que deve mostrar os elementos na arvore usando recursividade
